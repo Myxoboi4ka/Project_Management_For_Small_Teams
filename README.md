@@ -18,12 +18,12 @@
 |attachments|Файлы и вложения|filename, file_url, task_id, project_id|
 
 Создание базы данных
-CREATE DATABASE Project_Management_For_Small_Teams;
+>CREATE DATABASE Project_Management_For_Small_Teams;
 
 Инициализация схемы
-Выполните SQL-скрипт создания таблиц из файла create_tables.sql
+>Выполните SQL-скрипт создания таблиц из файла create_tables.sql
 
 Наполнение тестовыми данными
-Выполните SQL-скрипт с INSERT-запросами для заполнения тестовыми данными из файла insert_data.sql
+>Выполните SQL-скрипт с INSERT-запросами для заполнения тестовыми данными из файла insert_data.sql
 
 Ключевые представления
