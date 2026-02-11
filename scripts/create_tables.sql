@@ -99,3 +99,7 @@ CREATE TABLE attachments (
     uploaded_by INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE INDEX idx_tasks_project_status ON tasks(project_id, status);
+CREATE INDEX idx_tasks_assignee_status ON tasks(assignee_id, status);
+CREATE INDEX idx_time_entries_user_date ON time_entries(user_id, entry_date);
+CREATE INDEX idx_projects_team_status ON projects(team_id, status);
