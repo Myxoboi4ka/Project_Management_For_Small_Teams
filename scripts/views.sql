@@ -39,18 +39,6 @@ ORDER BY
     END,
     t.due_date ASC;
 
---Пример использования представления: 
---найти перегруженных сотрудников
-SELECT * FROM view_employee_active_tasks 
-WHERE task_status = 'in_progress' 
-ORDER BY user_id;
---просроченные задачи по отделам
-SELECT team_name, COUNT(*) as overdue_tasks
-FROM view_employee_active_tasks 
-WHERE is_overdue = true
-GROUP BY team_name;
-
-
 
 --Прогресс проектов
   --Общее количество задач в проекте
@@ -100,12 +88,6 @@ ORDER BY
     END,
     p.deadline ASC;
 
---Пример использования представления: найти проекты с низким процентом завершения
-SELECT * FROM view_project_progress 
-WHERE completion_percentage < 50 
-AND project_status = 'active';
-
-
 
 --Временные затраты по проектам
   --Фактические затраченные часы
@@ -142,7 +124,3 @@ HAVING
     SUM(te.hours_spent) > 0
 ORDER BY 
     total_hours_spent DESC;
-
---Пример использования представления: найти проекты, где фактические затраты превышают оценку
-SELECT * FROM view_project_time_tracking 
-WHERE estimated_vs_actual_percent > 100;
