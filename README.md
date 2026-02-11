@@ -78,18 +78,11 @@ CREATE INDEX idx_time_entries_user_date ON time_entries(user_id, entry_date);
 CREATE INDEX idx_projects_team_status ON projects(team_id, status);
 ```
 
-# Поддержка
+# Дополнительная информация
 >Частые проблемы и решения:
 1. Медленные запросы - проверьте индексы, используйте EXPLAIN ANALYZE
 2. Дублирование данных - добавьте UNIQUE constraints
-3. Неверные временные записи - проверьте триггеры на корректность часов
-
-> Контакты:
-- Техническая поддержка: devops@company.com
-- Администратор БД: dba@company.com
-- Разработчики: developers@company.com
 
 Версия: 1.0.0
-Последнее обновление: Январь 2026
+Дата проекта: Январь 2026
 СУБД: PostgreSQL 18
-Лицензия: TEST
