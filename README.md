@@ -1,10 +1,10 @@
-# Project_Management_For_Small_Teams
+## Project_Management_For_Small_Teams
 Система управления проектами для малых команд
 
-Описание проекта
+# Описание проекта
 База данных для системы управления проектами, командами и задачами в компании. Система позволяет отслеживать прогресс проектов, распределять задачи между сотрудниками, контролировать сроки и анализировать рабочую нагрузку.
 
-Структура базы данных
+# Структура базы данных
 Основные таблицы:
 |Таблица|Описание|Ключевые поля|
 |-------|--------|-------------|
@@ -17,13 +17,79 @@
 |time_entries|Учет рабочего времени|task_id, user_id, hours_spent, entry_date|
 |attachments|Файлы и вложения|filename, file_url, task_id, project_id|
 
-Создание базы данных
+# Создание базы данных
 >CREATE DATABASE Project_Management_For_Small_Teams;
 
-Инициализация схемы
+# Инициализация схемы
 >Выполните SQL-скрипт создания таблиц из файла create_tables.sql
 
-Наполнение тестовыми данными
+# Наполнение тестовыми данными
 >Выполните SQL-скрипт с INSERT-запросами для заполнения тестовыми данными из файла insert_data.sql
 
-Ключевые представления
+# Ключевые представления:
+>Активные задачи по сотрудникам
+```
+SELECT * FROM view_employee_active_tasks
+```
+>Прогресс проектов
+```
+SELECT * FROM view_project_progress
+```
+>Временные затраты по проектам
+```
+SELECT * FROM view_project_time_tracking
+```
+
+# **Полезные отчеты** :
+>Найти перегруженных сотрудников
+```
+SELECT * FROM view_employee_active_tasks 
+WHERE task_status = 'in_progress' 
+ORDER BY user_id;
+```
+
+>Просроченные задачи по отделам
+```
+SELECT team_name, COUNT(*) as overdue_tasks
+FROM view_employee_active_tasks 
+WHERE is_overdue = true
+GROUP BY team_name;
+```
+
+>Найти проекты с низким процентом завершения
+```
+SELECT * FROM view_project_progress 
+WHERE completion_percentage < 50 
+AND project_status = 'active';
+```
+
+>Найти проекты, где фактические затраты превышают оценку
+```
+SELECT * FROM view_project_time_tracking 
+WHERE estimated_vs_actual_percent > 100;
+```
+
+# Дополнительные ресурсы:
+>Индексы для оптимизации
+```
+CREATE INDEX idx_tasks_project_status ON tasks(project_id, status);
+CREATE INDEX idx_tasks_assignee_status ON tasks(assignee_id, status);
+CREATE INDEX idx_time_entries_user_date ON time_entries(user_id, entry_date);
+CREATE INDEX idx_projects_team_status ON projects(team_id, status);
+```
+
+# Поддержка
+>Частые проблемы и решения:
+1. Медленные запросы - проверьте индексы, используйте EXPLAIN ANALYZE
+2. Дублирование данных - добавьте UNIQUE constraints
+3. Неверные временные записи - проверьте триггеры на корректность часов
+
+> Контакты:
+- Техническая поддержка: devops@company.com
+- Администратор БД: dba@company.com
+- Разработчики: developers@company.com
+
+Версия: 1.0.0
+Последнее обновление: Январь 2026
+СУБД: PostgreSQL 18
+Лицензия: TEST
